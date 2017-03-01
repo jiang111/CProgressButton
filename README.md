@@ -3,7 +3,7 @@
 a circle progress button like iOS <br />
 
 
-![art](https://raw.githubusercontent.com/jiang111/CProgressButton/master/art/art.gif)
+![art](https://raw.githubusercontent.com/jiang111/CProgressButton/master/art/art1.gif)
 
 ## Usage:
 
