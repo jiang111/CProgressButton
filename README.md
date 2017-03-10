@@ -30,7 +30,7 @@ Step 2. Add the dependency
 CProgressButton.initStatusString(new String[]{"download","pause","complete","error","delete"});
  //use 
 CProgressButton progressButton = (CProgressButton)findViewById(R.id.btn2);
-progressButton.normal(0/1/2/3); //mac value is the String[] length - 1;
+progressButton.normal(0/1/2/3); //max value is String[].length - 1;
 progressButton.startDownload();
 progressButton.download(progress);
 ```
