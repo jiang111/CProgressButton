@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.jiang.android.pbutton.CProgressButton;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -119,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     valueAnimator.start();
                 }else{
                     valueAnimator.cancel();
-                    progressButton.normal(0);
+                    progressButton.normal(4);
                     tv.setText("state normal");
                 }
 

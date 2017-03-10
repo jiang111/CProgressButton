@@ -25,7 +25,7 @@
             android:text="state:"
             android:layout_height="wrap_content" />
 
-        <com.jiang.android.cprogressbutton.CProgressButton
+        <com.jiang.android.pbutton.CProgressButton
             android:layout_width="65dp"
             android:layout_marginLeft="50dp"
             android:gravity="center"
@@ -50,7 +50,7 @@
             android:text="state:"
             android:layout_height="wrap_content" />
 
-        <com.jiang.android.cprogressbutton.CProgressButton
+        <com.jiang.android.pbutton.CProgressButton
             android:layout_width="65dp"
             android:layout_marginLeft="50dp"
             app:stroke_width="1dp"
@@ -74,7 +74,7 @@
             android:text="state:"
             android:layout_height="wrap_content" />
 
-        <com.jiang.android.cprogressbutton.CProgressButton
+        <com.jiang.android.pbutton.CProgressButton
             android:layout_width="65dp"
             android:layout_marginLeft="50dp"
             android:gravity="center"
