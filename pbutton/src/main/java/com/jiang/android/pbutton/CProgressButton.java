@@ -103,7 +103,9 @@ public class CProgressButton extends Button  implements ProgressListener{
 
     private void setState(STATE state) {
         if(state == mState) {
-            setText(resultString);
+            if(state == STATE.NORMAL) {
+                setText(resultString);
+            }
             return;
         }
         if(getWidth() == 0 || morphingCircle || morphingNormal)
@@ -359,8 +361,8 @@ public class CProgressButton extends Button  implements ProgressListener{
 
     @Override
     public void startDownLoad() {
+        resultString="";
         setState(STATE.PROGRESS);
-        setText("");
 
     }
 
