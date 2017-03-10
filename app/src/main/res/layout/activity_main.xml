@@ -28,7 +28,6 @@
         <com.jiang.android.cprogressbutton.CProgressButton
             android:layout_width="65dp"
             android:layout_marginLeft="50dp"
-            android:text="Download"
             android:gravity="center"
             app:stroke_width="1dp"
             app:radius="40dp"
@@ -54,7 +53,6 @@
         <com.jiang.android.cprogressbutton.CProgressButton
             android:layout_width="65dp"
             android:layout_marginLeft="50dp"
-            android:text="Download"
             app:stroke_width="1dp"
             app:radius="40dp"
             app:color="@color/colorPrimary"
@@ -79,7 +77,6 @@
         <com.jiang.android.cprogressbutton.CProgressButton
             android:layout_width="65dp"
             android:layout_marginLeft="50dp"
-            android:text="Download"
             android:gravity="center"
             android:textSize="12sp"
             app:stroke_width="1dp"

@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        CProgressButton.initStatusString(new String[]{"下载","暂停","完成","出错","删除"});
 
         button1();
         button2();
@@ -26,14 +27,13 @@ public class MainActivity extends AppCompatActivity {
         final CProgressButton progressButton = (CProgressButton)findViewById(R.id.btn3);
 
 
-
         final TextView tv = (TextView) findViewById(R.id.state3);
         progressButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ValueAnimator valueAnimator = ValueAnimator.ofInt(0,100);
                 if(progressButton.getState() == CProgressButton.STATE.NORMAL){
-                    progressButton.setState(CProgressButton.STATE.PROGRESS);
+                    progressButton.startDownLoad();
                     valueAnimator.setDuration(5000);
                     valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         @Override
@@ -41,19 +41,17 @@ public class MainActivity extends AppCompatActivity {
                             int value = (int)animation.getAnimatedValue();
                             tv.setText("state progress:"+value);
                             if(value == 100){
-                                progressButton.setState(CProgressButton.STATE.NORMAL);
+                                progressButton.normal(2);
                                 tv.setText("state normal");
-                                progressButton.setText("Finish");
                             }
-                            progressButton.setProgress(value);
+                            progressButton.download(value);
                         }
                     });
                     valueAnimator.start();
                 }else{
                     valueAnimator.cancel();
-                    progressButton.setState(CProgressButton.STATE.NORMAL);
+                    progressButton.normal(0);
                     tv.setText("state normal");
-                    progressButton.setText("Continue");
                 }
 
             }
@@ -70,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ValueAnimator valueAnimator = ValueAnimator.ofInt(0,100);
                 if(progressButton.getState() == CProgressButton.STATE.NORMAL){
-                    progressButton.setState(CProgressButton.STATE.PROGRESS);
+                    progressButton.startDownLoad();
                     valueAnimator.setDuration(5000);
                     valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         @Override
@@ -78,19 +76,17 @@ public class MainActivity extends AppCompatActivity {
                             int value = (int)animation.getAnimatedValue();
                             tv.setText("state progress:"+value);
                             if(value == 100){
-                                progressButton.setState(CProgressButton.STATE.NORMAL);
+                                progressButton.normal(2);
                                 tv.setText("state normal");
-                                progressButton.setText("Finish");
                             }
-                            progressButton.setProgress(value);
+                            progressButton.download(value);
                         }
                     });
                     valueAnimator.start();
                 }else{
                     valueAnimator.cancel();
-                    progressButton.setState(CProgressButton.STATE.NORMAL);
+                    progressButton.normal(0);
                     tv.setText("state normal");
-                    progressButton.setText("Continue");
                 }
 
             }
@@ -106,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ValueAnimator valueAnimator = ValueAnimator.ofInt(0,100);
                 if(progressButton.getState() == CProgressButton.STATE.NORMAL){
-                    progressButton.setState(CProgressButton.STATE.PROGRESS);
+                    progressButton.startDownLoad();
                     valueAnimator.setDuration(5000);
                     valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         @Override
@@ -114,19 +110,17 @@ public class MainActivity extends AppCompatActivity {
                             int value = (int)animation.getAnimatedValue();
                             tv.setText("state progress:"+value);
                             if(value == 100){
-                                progressButton.setState(CProgressButton.STATE.NORMAL);
+                                progressButton.normal(2);
                                 tv.setText("state normal");
-                                progressButton.setText("Finish");
                             }
-                            progressButton.setProgress(value);
+                            progressButton.download(value);
                         }
                     });
                     valueAnimator.start();
                 }else{
                     valueAnimator.cancel();
-                    progressButton.setState(CProgressButton.STATE.NORMAL);
+                    progressButton.normal(0);
                     tv.setText("state normal");
-                    progressButton.setText("Continue");
                 }
 
             }

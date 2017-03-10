@@ -17,9 +17,8 @@ import android.widget.Button;
  * Created by jiang on 2017/3/1.
  */
 
-public class CProgressButton extends Button {
+public class CProgressButton extends Button  implements ProgressListener{
 
-    private static final int STOREWIDTH = 1;
     private Drawable mBackground;
     private CProgressDrawable mProgressDrawable;
     private int mWidth;
@@ -35,6 +34,8 @@ public class CProgressButton extends Button {
     private int mStrokeColor;
     private int mStokeWidth = 0;
     private int mStokeWidthOut = 0;
+    private static String[] statusString = new String[]{"下载","暂停","完成","出错","删除"};
+
 
     public enum STATE{
         PROGRESS,NORMAL
@@ -65,17 +66,41 @@ public class CProgressButton extends Button {
         } finally {
             a.recycle();
         }
+
+        if(mStrokeColor == -1){
+            mStrokeColor = getResources().getColor(R.color.black);
+        }
+        if(mBackground == null){
+            throw new NullPointerException("drawable_xml can not be null");
+        }
+
+        if(mStokeWidthOut == -1){
+            mStokeWidthOut = dip2px(getContext(),1);
+        }
+        if(mFromCornerRadius == -1){
+            throw new NullPointerException("radius must can not be null");
+        }
         mStokeWidth = mStokeWidthOut*3;
+        normal(0);
     }
 
 
+    /**
+     * order by yourself
+     * @param status
+     */
+    public static void initStatusString(String[] status){
+        if(status!= null && status.length >0){
+            statusString = status;
+        }
+    }
 
 
     public STATE getState() {
         return mState;
     }
 
-    public void setState(STATE state) {
+    private void setState(STATE state) {
         if(state == mState)
             return;
         if(getWidth() == 0 || morphingCircle || morphingNormal)
@@ -88,8 +113,6 @@ public class CProgressButton extends Button {
         }
 
     }
-
-
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -120,7 +143,7 @@ public class CProgressButton extends Button {
 
     }
 
-    public void setProgress(int progress){
+    private void setProgress(int progress){
         mProgress = progress;
         if(morphingCircle || morphingNormal)
             return;
@@ -317,4 +340,28 @@ public class CProgressButton extends Button {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
+
+
+    @Override
+    public void download(int progress) {
+        setProgress(progress);
+    }
+
+    @Override
+    public void normal(int status) {
+        setState(STATE.NORMAL);
+        setText(statusString[status]);
+
+    }
+
+    @Override
+    public void startDownLoad() {
+        setState(STATE.PROGRESS);
+        setText("");
+
+    }
+
+
+
+
 }
