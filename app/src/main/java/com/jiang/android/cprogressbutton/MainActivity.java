@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CProgressButton.initStatusString(new String[]{"下载","暂停","完成","出错","删除"});
+        CProgressButton.initStatusString(new String[]{"download","pause","complete","error","delete"});
 
         button1();
         button2();

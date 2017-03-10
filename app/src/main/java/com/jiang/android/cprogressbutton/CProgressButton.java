@@ -34,7 +34,7 @@ public class CProgressButton extends Button  implements ProgressListener{
     private int mStrokeColor;
     private int mStokeWidth = 0;
     private int mStokeWidthOut = 0;
-    private static String[] statusString = new String[]{"下载","暂停","完成","出错","删除"};
+    private static String[] statusString = new String[]{"download","pause","complete","error","delete"};
 
 
     public enum STATE{
