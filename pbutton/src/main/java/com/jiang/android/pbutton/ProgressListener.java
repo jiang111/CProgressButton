@@ -1,4 +1,4 @@
-package com.jiang.android.cprogressbutton;
+package com.jiang.android.pbutton;
 
 /**
  * Created by jiang on 2017/3/10.

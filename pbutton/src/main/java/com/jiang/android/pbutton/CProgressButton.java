@@ -1,4 +1,4 @@
-package com.jiang.android.cprogressbutton;
+package com.jiang.android.pbutton;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -35,6 +35,7 @@ public class CProgressButton extends Button  implements ProgressListener{
     private int mStokeWidth = 0;
     private int mStokeWidthOut = 0;
     private static String[] statusString = new String[]{"download","pause","complete","error","delete"};
+    private String resultString;
 
 
     public enum STATE{
@@ -101,8 +102,10 @@ public class CProgressButton extends Button  implements ProgressListener{
     }
 
     private void setState(STATE state) {
-        if(state == mState)
+        if(state == mState) {
+            setText(resultString);
             return;
+        }
         if(getWidth() == 0 || morphingCircle || morphingNormal)
             return;
         this.mState = state;
@@ -206,6 +209,7 @@ public class CProgressButton extends Button  implements ProgressListener{
             @Override
             public void onAnimationEnd(Animator animation) {
                 morphingNormal = false;
+                setText(resultString);
             }
 
             @Override
@@ -349,9 +353,8 @@ public class CProgressButton extends Button  implements ProgressListener{
 
     @Override
     public void normal(int status) {
+        resultString = statusString[status];
         setState(STATE.NORMAL);
-        setText(statusString[status]);
-
     }
 
     @Override
