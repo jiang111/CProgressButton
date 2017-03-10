@@ -9,52 +9,28 @@ a circle progress button like iOS <br />
 
 ###code
 ```
- final CProgressButton progressButton = (CProgressButton)findViewById(R.id.btn);
-        progressButton.setbgDrawable(R.drawable.bounder,40); //config  bg
-        progressButton.setStroke(1,R.color.colorAccent);  //config stroke color
-        final TextView tv = (TextView) findViewById(R.id.state);
-        progressButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ValueAnimator valueAnimator = ValueAnimator.ofInt(0,100);
-                if(progressButton.getState() == CProgressButton.STATE.NORMAL){
-                    progressButton.setState(CProgressButton.STATE.PROGRESS);
-                    valueAnimator.setDuration(5000);
-                    valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                        @Override
-                        public void onAnimationUpdate(ValueAnimator animation) {
-                            int value = (int)animation.getAnimatedValue();
-                            tv.setText("state progress:"+value);
-                            if(value == 100){
-                                progressButton.setState(CProgressButton.STATE.NORMAL);
-                                tv.setText("state normal");
-                                progressButton.setText("Finish");
-                            }
-                            progressButton.setProgress(value);
-                        }
-                    });
-                    valueAnimator.start();
-                }else{
-                    valueAnimator.cancel();
-                    progressButton.setState(CProgressButton.STATE.NORMAL);
-                    tv.setText("state normal");
-                    progressButton.setText("Continue");
-                }
-
-            }
-        });
+//config in your app
+CProgressButton.initStatusString(new String[]{"download","pause","complete","error","delete"});
+ //use 
+CProgressButton progressButton = (CProgressButton)findViewById(R.id.btn2);
+progressButton.normal(0/1/2/3); //mac value is the String[] length - 1;
+progressButton.startDownload();
+progressButton.download(progress);
 ```
 ###layout
 ```
-<com.jiang.android.cprogressbutton.CProgressButton
-        android:layout_width="65dp"
-        android:layout_marginLeft="50dp"
-        android:text="Download"
-        android:gravity="center"
-        android:textSize="12sp"
-        android:textColor="@color/colorAccent"
-        android:id="@+id/btn"
-        android:layout_height="30dp" />
+ <com.jiang.android.cprogressbutton.CProgressButton
+            android:layout_width="65dp"
+            android:layout_marginLeft="50dp"
+            android:gravity="center"
+            app:stroke_width="1dp"  //stroke outside width
+            app:radius="40dp"       //outside  radius
+            app:color="@color/colorAccent"       //all line color
+            app:drawable_xml="@drawable/bounder"  //bg drawable
+            android:textSize="12sp"
+            android:textColor="@color/colorAccent"
+            android:id="@+id/btn"
+            android:layout_height="30dp" />
 ```
 
 ### License
