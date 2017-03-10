@@ -1,7 +1,7 @@
 # CProgressButton
 
 a circle progress button like iOS <br />
-
+[![](https://jitpack.io/v/jiang111/CProgressButton.svg)](https://jitpack.io/#jiang111/CProgressButton) <br />
 
 ![art](https://raw.githubusercontent.com/jiang111/CProgressButton/master/art/art2.gif)
 
