@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CProgressButton">
+        <attr name="color" format="color" />
+        <attr name="drawable_xml" format="reference" />
+        <attr name="stroke_width" format="dimension" />
+        <attr name="radius" format="dimension" />
+    </declare-styleable>
+
+</resources>

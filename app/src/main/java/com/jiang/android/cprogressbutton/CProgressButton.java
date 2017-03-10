@@ -5,12 +5,11 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.DrawableRes;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.Button;
 
@@ -54,32 +53,22 @@ public class CProgressButton extends Button {
 
     public CProgressButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        TypedArray a = getContext().getTheme().obtainStyledAttributes(
+                attrs,
+                R.styleable.CProgressButton,
+                0, 0);
+        try {
+            mStrokeColor  = a.getInteger(R.styleable.CProgressButton_color, -1);
+            mBackground  =  a.getDrawable(R.styleable.CProgressButton_drawable_xml);
+            mStokeWidthOut = (int) a.getDimension(R.styleable.CProgressButton_stroke_width, -1);
+            mFromCornerRadius = (int) a.getDimension(R.styleable.CProgressButton_radius, -1);
+        } finally {
+            a.recycle();
+        }
+        mStokeWidth = mStokeWidthOut*3;
     }
 
-    /**
-     * config stroke width color
-     * @param width
-     * @param color
-     */
-    public void setStroke(int width, int color) {
-        setProgressStroke(width);
-        mStrokeColor = ContextCompat.getColor(getContext(),color);
-    }
 
-    private void setProgressStroke(int storewidth) {
-        mStokeWidth = dip2px(getContext(),storewidth*3);
-        mStokeWidthOut = dip2px(getContext(),storewidth);
-    }
-
-    /**
-     * config bg & conor
-     * @param drawable
-     * @param defaultCornor
-     */
-    public void setbgDrawable(@DrawableRes int drawable,float defaultCornor){
-        mBackground  = ContextCompat.getDrawable(getContext(), drawable);
-        mFromCornerRadius = defaultCornor;
-    }
 
 
     public STATE getState() {

@@ -24,8 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void button3() {
         final CProgressButton progressButton = (CProgressButton)findViewById(R.id.btn3);
-        progressButton.setbgDrawable(R.drawable.bounder3,40);
-        progressButton.setStroke(1,R.color.black);
+
 
 
         final TextView tv = (TextView) findViewById(R.id.state3);
@@ -63,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void button2() {
         final CProgressButton progressButton = (CProgressButton)findViewById(R.id.btn2);
-        progressButton.setbgDrawable(R.drawable.bounder2,40);
-        progressButton.setStroke(1,R.color.colorPrimary);
 
 
         final TextView tv = (TextView) findViewById(R.id.state2);
@@ -102,9 +99,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void button1() {
         final CProgressButton progressButton = (CProgressButton)findViewById(R.id.btn);
-        progressButton.setbgDrawable(R.drawable.bounder,40);
-        progressButton.setStroke(1,R.color.colorAccent);
-
 
         final TextView tv = (TextView) findViewById(R.id.state);
         progressButton.setOnClickListener(new View.OnClickListener() {
