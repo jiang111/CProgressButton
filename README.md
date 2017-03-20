@@ -7,7 +7,7 @@ a circle progress button like iOS <br />
 
 ## Usage:
 
-###Gradle
+### Gradle
 ```
 Add it in your root build.gradle at the end of repositories:
 	allprojects {
@@ -24,7 +24,7 @@ Step 2. Add the dependency
 ```
 
 
-###code
+### code
 ```
 //config in your app
 CProgressButton.initStatusString(new String[]{"download","pause","complete","error","delete"});
@@ -34,7 +34,7 @@ progressButton.normal(0/1/2/3); //max value is String[].length - 1;
 progressButton.startDownload();
 progressButton.download(progress);
 ```
-###layout
+### layout
 ```
  <com.jiang.android.cprogressbutton.CProgressButton
             android:layout_width="65dp"
