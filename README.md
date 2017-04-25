@@ -30,26 +30,35 @@ Step 2. Add the dependency
 CProgressButton.initStatusString(new String[]{"download","pause","complete","error","delete"});
  //use 
 CProgressButton progressButton = (CProgressButton)findViewById(R.id.btn2);
-progressButton.normal(0/1/2/3); //max value is String[].length - 1;
-progressButton.startDownload();
+progressButton.normal(0/1/2/3); //max value is String[].length - 1;  call anytime;
+progressButton.startDownload();  //you must call startDownload() before download(progress);
 progressButton.download(progress);
 ```
-### layout
+### xml
+
+layout
 ```
  <com.jiang.android.pbutton.CProgressButton
             android:layout_width="65dp"
             android:layout_marginLeft="50dp"
             android:gravity="center"
-            app:stroke_width="1dp"  //stroke outside width
-            app:radius="40dp"       //outside  radius
-            app:color="@color/colorAccent"       //all line color
+            app:stroke_width="1dp"  //stroke outside width -> the width in bounder.xml
+            app:radius="40dp"       //outside  radius  -> the radius in bounder.xml
+            app:color="@color/colorAccent"       //all line color the color in bounder.xml
             app:drawable_xml="@drawable/bounder"  //bg drawable
             android:textSize="12sp"
             android:textColor="@color/colorAccent"
             android:id="@+id/btn"
             android:layout_height="30dp" />
 ```
-
+drawable-> bounder.xml
+```
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <stroke android:color="@color/colorAccent" android:width="1dp" />
+    <corners android:radius="40dp" />
+</shape>
+```
 
 ### Other
  If you found this library helpful or you learned something today and want to thank me, [buying me a cup of ☕️  with paypal](https://www.paypal.me/jyuesong) <br /><br />
