@@ -36,7 +36,7 @@ progressButton.download(progress);
 ```
 ### layout
 ```
- <com.jiang.android.cprogressbutton.CProgressButton
+ <com.jiang.android.pbutton.CProgressButton
             android:layout_width="65dp"
             android:layout_marginLeft="50dp"
             android:gravity="center"
