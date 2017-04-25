@@ -30,9 +30,12 @@ Step 2. Add the dependency
 CProgressButton.initStatusString(new String[]{"download","pause","complete","error","delete"});
  //use 
 CProgressButton progressButton = (CProgressButton)findViewById(R.id.btn2);
-progressButton.normal(0/1/2/3); //max value is String[].length - 1;  call anytime;
-progressButton.startDownload();  //you must call startDownload() before download(progress);
-progressButton.download(progress);
+if(progressButton.getState() != CProgressButton.STATE.NORMAL){
+	progressButton.normal(0/1/2/3); //max value is String[].length - 1;  call anytime;
+}else{
+	progressButton.startDownload();  //you must call startDownload() before download(progress);
+	progressButton.download(progress);
+}
 ```
 ### xml
 
