@@ -102,9 +102,6 @@ public class CProgressButton extends Button implements ProgressListener {
         return mState;
     }
 
-    private void setState(STATE state) {
-        setState(state, true);
-    }
 
     private void setState(STATE state, boolean anim) {
         if (state == mState) {
@@ -366,14 +363,18 @@ public class CProgressButton extends Button implements ProgressListener {
 
     @Override
     public void normal(int status) {
+        normal(status, true);
+    }
+
+    public void normal(int status, boolean anim) {
         resultString = statusString[status];
-        setState(STATE.NORMAL);
+        setState(STATE.NORMAL, anim);
     }
 
     @Override
     public void startDownLoad() {
         resultString = "";
-        setState(STATE.PROGRESS);
+        setState(STATE.PROGRESS, true);
 
     }
 

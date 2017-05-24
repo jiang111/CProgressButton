@@ -19,7 +19,7 @@ Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        compile 'com.github.jiang111:CProgressButton:v1.2'
+	        compile 'com.github.jiang111:CProgressButton:v1.2.2'
 	}
 ```
 
