@@ -152,6 +152,10 @@ public class CProgressButton extends Button  implements ProgressListener{
         mProgress = progress;
         if(morphingCircle || morphingNormal)
             return;
+        if (mState != STATE.PROGRESS) {
+            mState = STATE.PROGRESS;
+            setText("");
+        }
         if(mProgress >= mMaxProgress){
             mProgress = mMaxProgress;
         }
