@@ -119,6 +119,13 @@ public class CProgressButton extends Button implements ProgressListener {
             } else if (mState == STATE.NORMAL) {
                 morph2Normal();
             }
+        } else {
+            morphingCircle = morphingNormal = false;
+            if (mState == STATE.PROGRESS) {
+                setText("");
+            } else if (mState == STATE.NORMAL) {
+                setText(resultString);
+            }
         }
 
     }
