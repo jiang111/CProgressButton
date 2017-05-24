@@ -17,7 +17,7 @@ import android.widget.Button;
  * Created by jiang on 2017/3/1.
  */
 
-public class CProgressButton extends Button  implements ProgressListener{
+public class CProgressButton extends Button implements ProgressListener {
 
     private Drawable mBackground;
     private CProgressDrawable mProgressDrawable;
@@ -26,31 +26,31 @@ public class CProgressButton extends Button  implements ProgressListener{
     private STATE mState = STATE.NORMAL;
     private boolean morphingCircle; //变形成圆中
     private boolean morphingNormal; //变形成正常状态中
-    private float mFromCornerRadius=40;
-    private float mToCornerRadius=90;
-    private long mDuration=500;
+    private float mFromCornerRadius = 40;
+    private float mToCornerRadius = 90;
+    private long mDuration = 500;
     private int mProgress;
     private int mMaxProgress = 100;
     private int mStrokeColor;
     private int mStokeWidth = 0;
     private int mStokeWidthOut = 0;
-    private static String[] statusString = new String[]{"download","pause","complete","error","delete"};
+    private static String[] statusString = new String[]{"download", "pause", "complete", "error", "delete"};
     private String resultString;
 
 
-    public enum STATE{
-        PROGRESS,NORMAL
+    public enum STATE {
+        PROGRESS, NORMAL
     }
 
     private static final String TAG = "CProgressButton";
 
 
     public CProgressButton(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public CProgressButton(Context context, AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public CProgressButton(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -60,38 +60,39 @@ public class CProgressButton extends Button  implements ProgressListener{
                 R.styleable.CProgressButton,
                 0, 0);
         try {
-            mStrokeColor  = a.getInteger(R.styleable.CProgressButton_color, -1);
-            mBackground  =  a.getDrawable(R.styleable.CProgressButton_drawable_xml);
+            mStrokeColor = a.getInteger(R.styleable.CProgressButton_color, -1);
+            mBackground = a.getDrawable(R.styleable.CProgressButton_drawable_xml);
             mStokeWidthOut = (int) a.getDimension(R.styleable.CProgressButton_stroke_width, -1);
             mFromCornerRadius = (int) a.getDimension(R.styleable.CProgressButton_radius, -1);
         } finally {
             a.recycle();
         }
 
-        if(mStrokeColor == -1){
+        if (mStrokeColor == -1) {
             mStrokeColor = getResources().getColor(R.color.black);
         }
-        if(mBackground == null){
+        if (mBackground == null) {
             throw new NullPointerException("drawable_xml can not be null");
         }
 
-        if(mStokeWidthOut == -1){
-            mStokeWidthOut = dip2px(getContext(),1);
+        if (mStokeWidthOut == -1) {
+            mStokeWidthOut = dip2px(getContext(), 1);
         }
-        if(mFromCornerRadius == -1){
+        if (mFromCornerRadius == -1) {
             throw new NullPointerException("radius must can not be null");
         }
-        mStokeWidth = mStokeWidthOut*3;
+        mStokeWidth = mStokeWidthOut * 3;
         normal(0);
     }
 
 
     /**
      * order by yourself
+     *
      * @param status
      */
-    public static void initStatusString(String[] status){
-        if(status!= null && status.length >0){
+    public static void initStatusString(String[] status) {
+        if (status != null && status.length > 0) {
             statusString = status;
         }
     }
@@ -102,19 +103,25 @@ public class CProgressButton extends Button  implements ProgressListener{
     }
 
     private void setState(STATE state) {
-        if(state == mState) {
-            if(state == STATE.NORMAL) {
+        setState(state, false);
+    }
+
+    private void setState(STATE state, boolean anim) {
+        if (state == mState) {
+            if (state == STATE.NORMAL) {
                 setText(resultString);
             }
             return;
         }
-        if(getWidth() == 0 || morphingCircle || morphingNormal)
+        if (getWidth() == 0 || morphingCircle || morphingNormal)
             return;
         this.mState = state;
-        if(mState == STATE.PROGRESS){
-            morph2Circle();
-        }else if(mState == STATE.NORMAL){
-            morph2Normal();
+        if (anim) {
+            if (mState == STATE.PROGRESS) {
+                morph2Circle();
+            } else if (mState == STATE.NORMAL) {
+                morph2Normal();
+            }
         }
 
     }
@@ -122,44 +129,44 @@ public class CProgressButton extends Button  implements ProgressListener{
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        mWidth = getWidth()  -getPaddingLeft() - getPaddingRight();
-        mHeight = getHeight()  - getPaddingTop() - getPaddingRight();
+        mWidth = getWidth() - getPaddingLeft() - getPaddingRight();
+        mHeight = getHeight() - getPaddingTop() - getPaddingRight();
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        if(mState == STATE.NORMAL || (mState == STATE.PROGRESS && morphingCircle)) {
+        if (mState == STATE.NORMAL || (mState == STATE.PROGRESS && morphingCircle)) {
             setBound(0);
-        }else{
+        } else {
             invalidate();
         }
     }
 
-    private void setBound(int padding){
-        if(mWidth == 0){
-            mWidth = getWidth()  -getPaddingLeft() - getPaddingRight();
+    private void setBound(int padding) {
+        if (mWidth == 0) {
+            mWidth = getWidth() - getPaddingLeft() - getPaddingRight();
         }
-        if(mHeight == 0){
-            mHeight = getHeight()  - getPaddingTop() - getPaddingRight();
+        if (mHeight == 0) {
+            mHeight = getHeight() - getPaddingTop() - getPaddingRight();
         }
-        mBackground.setBounds(getPaddingLeft()+padding,getPaddingTop(),getPaddingLeft()+mWidth- padding,getPaddingTop()+mHeight);
+        mBackground.setBounds(getPaddingLeft() + padding, getPaddingTop(), getPaddingLeft() + mWidth - padding, getPaddingTop() + mHeight);
         invalidate();
 
     }
 
-    private void setProgress(int progress){
+    private void setProgress(int progress) {
         mProgress = progress;
-        if(morphingCircle || morphingNormal)
+        if (morphingCircle || morphingNormal)
             return;
         if (mState != STATE.PROGRESS) {
             mState = STATE.PROGRESS;
             setText("");
         }
-        if(mProgress >= mMaxProgress){
+        if (mProgress >= mMaxProgress) {
             mProgress = mMaxProgress;
         }
-        if(mProgress<=0){
+        if (mProgress <= 0) {
             mProgress = 0;
         }
         invalidate();
@@ -169,15 +176,15 @@ public class CProgressButton extends Button  implements ProgressListener{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(mState == STATE.NORMAL || (mState == STATE.PROGRESS && morphingCircle)) {
+        if (mState == STATE.NORMAL || (mState == STATE.PROGRESS && morphingCircle)) {
             mBackground.draw(canvas);
-        }else if(mState == STATE.PROGRESS && !morphingCircle){
+        } else if (mState == STATE.PROGRESS && !morphingCircle) {
             if (mProgressDrawable == null) {
-                int offset = (mWidth - mHeight) / 2+getPaddingLeft();
+                int offset = (mWidth - mHeight) / 2 + getPaddingLeft();
                 int size = mHeight;
-                mProgressDrawable = new CProgressDrawable(getContext(),size, mStokeWidth,mStokeWidthOut, mStrokeColor);
+                mProgressDrawable = new CProgressDrawable(getContext(), size, mStokeWidth, mStokeWidthOut, mStrokeColor);
                 int left = offset;
-                mProgressDrawable.setBounds(left, getPaddingTop(),left+ mHeight, getPaddingTop()+mHeight);
+                mProgressDrawable.setBounds(left, getPaddingTop(), left + mHeight, getPaddingTop() + mHeight);
             }
             float sweepAngle = (360f / mMaxProgress) * mProgress;
             mProgressDrawable.setSweepAngle(sweepAngle);
@@ -189,15 +196,15 @@ public class CProgressButton extends Button  implements ProgressListener{
     private void morph2Normal() {
 
         ObjectAnimator cornerAnimation =
-                ObjectAnimator.ofFloat(mBackground, "cornerRadius", mToCornerRadius,mFromCornerRadius);
+                ObjectAnimator.ofFloat(mBackground, "cornerRadius", mToCornerRadius, mFromCornerRadius);
 
-        final int start = (mWidth-mHeight)/2;
-        ValueAnimator animator = ValueAnimator.ofInt(start,0);
+        final int start = (mWidth - mHeight) / 2;
+        ValueAnimator animator = ValueAnimator.ofInt(start, 0);
         animator.setDuration(mDuration)
                 .addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator animation) {
-                        int value = (int)animation.getAnimatedValue();
+                        int value = (int) animation.getAnimatedValue();
                         setBound(value);
                     }
 
@@ -232,18 +239,18 @@ public class CProgressButton extends Button  implements ProgressListener{
     }
 
 
-    private void morph2Circle(){
+    private void morph2Circle() {
 
         ObjectAnimator cornerAnimation =
                 ObjectAnimator.ofFloat(mBackground, "cornerRadius", mFromCornerRadius, mToCornerRadius);
 
-        final int end =(mWidth-mHeight)/2;
-        ValueAnimator animator = ValueAnimator.ofInt(0,end);
+        final int end = (mWidth - mHeight) / 2;
+        ValueAnimator animator = ValueAnimator.ofInt(0, end);
         animator.setDuration(mDuration)
                 .addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator animation) {
-                        int value = (int)animation.getAnimatedValue();
+                        int value = (int) animation.getAnimatedValue();
                         setBound(value);
                     }
                 });
@@ -365,12 +372,10 @@ public class CProgressButton extends Button  implements ProgressListener{
 
     @Override
     public void startDownLoad() {
-        resultString="";
+        resultString = "";
         setState(STATE.PROGRESS);
 
     }
-
-
 
 
 }
