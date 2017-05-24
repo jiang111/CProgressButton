@@ -103,7 +103,7 @@ public class CProgressButton extends Button implements ProgressListener {
     }
 
     private void setState(STATE state) {
-        setState(state, false);
+        setState(state, true);
     }
 
     private void setState(STATE state, boolean anim) {
