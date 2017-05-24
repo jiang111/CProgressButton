@@ -126,6 +126,7 @@ public class CProgressButton extends Button implements ProgressListener {
             } else if (mState == STATE.NORMAL) {
                 setText(resultString);
             }
+            setBound(0);
         }
 
     }
