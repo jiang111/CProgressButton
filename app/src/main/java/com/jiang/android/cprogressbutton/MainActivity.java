@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ValueAnimator valueAnimator = ValueAnimator.ofInt(0,100);
                 if(progressButton.getState() == CProgressButton.STATE.NORMAL){
-                    progressButton.startDownLoad();
                     valueAnimator.setDuration(5000);
                     valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         @Override
@@ -78,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                             int value = (int)animation.getAnimatedValue();
                             tv.setText("state progress:"+value);
                             if(value == 100){
-                                progressButton.normal(2);
+                                progressButton.normal(2,false);
                                 tv.setText("state normal");
                             }
                             progressButton.download(value);
@@ -87,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     valueAnimator.start();
                 }else{
                     valueAnimator.cancel();
-                    progressButton.normal(0);
+                    progressButton.normal(0,false);
                     tv.setText("state normal");
                 }
 

@@ -174,6 +174,7 @@ public class CProgressButton extends Button implements ProgressListener {
         if (mProgress <= 0) {
             mProgress = 0;
         }
+        setBound(0);
         invalidate();
 
     }
