@@ -16,10 +16,14 @@ Add it in your root build.gradle at the end of repositories:
 			maven { url 'https://jitpack.io' }
 		}
 	}
-Step 2. Add the dependency
+```
 
+Step 2. Add the dependency  [![](https://jitpack.io/v/jiang111/CProgressButton.svg)](https://jitpack.io/#jiang111/CProgressButton) <br />
+
+
+```
 	dependencies {
-	        compile 'com.github.jiang111:CProgressButton:v1.2.6'
+	        compile 'com.github.jiang111:CProgressButton:{last-version}'
 	}
 ```
 
