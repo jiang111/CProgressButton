@@ -141,6 +141,8 @@ public class CProgressButton extends Button implements ProgressListener {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        mWidth = w - getPaddingLeft() - getPaddingRight();
+        mHeight = h - getPaddingTop() - getPaddingRight();
         if (mState == STATE.NORMAL || (mState == STATE.PROGRESS && morphingCircle)) {
             setBound(0);
         } else {
